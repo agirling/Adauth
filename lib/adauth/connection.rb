@@ -18,10 +18,8 @@ module Adauth
         def bind
             conn = Net::LDAP.new :host => @config[:server],
                                  :port => @config[:port],
-                                 :base => @config[:base]
-            if @config[:encryption]
-               conn.encryption @config[:encryption]
-            end
+                                 :base => @config[:base],
+                                 :encryption => @config[:encryption]
             
             raise "Anonymous Bind is disabled" if @config[:password] == "" && !(@config[:anonymous_bind])
             
