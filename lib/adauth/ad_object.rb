@@ -33,6 +33,15 @@ module Adauth
           return super
         end
 
+        def respond_to?(method, include_private = false)
+          begin
+            self.send(method)
+            return true
+          rescue NoMethodError
+            return false
+          end
+        end
+
         def self.reverse_field(search)
           hash = {}
           self::Fields.each do |k, v|
